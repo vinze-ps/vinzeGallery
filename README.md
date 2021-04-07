@@ -129,8 +129,6 @@ vinzeGallery.init({
     smoothLoad: true,
     smoothLoadSpeed: 50,
     photosTransitionDuration: 300,
-    photosEasing: "easeOutSine",
-    photosHover: "zoomIn",
     layout: {
       xl: false,
       lg: 3,
@@ -171,4 +169,6 @@ gallery -> smoothLoadSpeed (number):
 The load interval between each of gallery photos.
 
 gallery -> photosTransitionDuration (number):
-The duration of transition
+The transition duration of gallery photos.
+
+gallery -> layout (object):
