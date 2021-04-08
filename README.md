@@ -161,6 +161,9 @@ vinzeGallery.init({
 mobileWidthBreakpoint (number):
 The width of the window you want to treat as a mobile breakpoint (You can just leave it as default 500 px).
 
+gallery (object):
+There you can pass values about all your galleries.
+
 gallery -> smoothLoad (boolean):
 false - gallery loads instantly.
 true - gallery loads smoothly.
@@ -172,3 +175,6 @@ gallery -> photosTransitionDuration (number):
 The transition duration of gallery photos.
 
 gallery -> layout (object):
+Layout sizes value.
+
+gallery -> layout -> xl (number):
