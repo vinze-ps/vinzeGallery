@@ -51,7 +51,7 @@ vinzeGallery.init({
     smoothLoadSpeed: 50,
     //Accepts: number, The transition duration of galleries photos (in ms).
     photosTransitionDuration: 300,
-    //Accepts: object, Default layout in different sizes (requires bootstrap and appropriate structure, look at "how to use it?").
+    //Accepts: object, Default layout in different sizes (requires bootstrap and appropriate structure, look at "how to use it?" at 2.b)).
     layout: {
       //Accepts: false | number, if not false, adds col-xl-.. classes.
       xl: false,
