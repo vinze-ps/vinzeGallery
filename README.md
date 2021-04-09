@@ -16,14 +16,13 @@ Mainly this is a full page slider that can be attached to your images on the web
 * buttons / touch & drag / zoom & move / scroll support in the slider,
 * optional default layout for galleries (requires bootstrap)
 
-## How to initialize it?
+## Instalation
 First of all attach *css* and *js* files in the **`<head></head>`** mark.
 
 ```css
 <link rel="stylesheet" href="vinzeGallery.min.css" type="text/css" />
 <script src="vinzeGallery.min.js"></script>
 ```
-
 
 You can also add bootstrap if you'd create gallery layout.
 
@@ -36,19 +35,71 @@ You can also add bootstrap if you'd create gallery layout.
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 ```
 
+## Initialize vinzeGallery.
+```javascript
+vinzeGallery.init();
 
-Then at the end of **`<body></body>`** mark add javascript code:
-
-```html
-<script>
-  vinzeGallery.init();
-</script>
+//You can pass optional settings as object (the default values are shown).
+vinzeGallery.init({
+  //Accepts: number, The width of the window you want to treat as a mobile breakpoint (in px).
+  mobileWidthBreakpoint: 500,
+  //Accepts: object, Settings that apply to all galleries.
+  gallery: {
+    //Accepts: boolean, If true galleries loads smoothly, false - loads instantly.
+    smoothLoad: true,
+    //Accepts: number, The load interval between each of gallery photos (in ms).
+    smoothLoadSpeed: 50,
+    //Accepts: number, The transition duration of galleries photos (in ms).
+    photosTransitionDuration: 300,
+    //Accepts: object, Default layout in different sizes (requires bootstrap and appropriate structure, look at "how to use it?").
+    layout: {
+      //Accepts: false | number, if not false, adds col-xl-.. classes.
+      xl: false,
+      //Accepts: false | number, if not false, adds col-lg-.. classes.
+      lg: 3,
+      //Accepts: false | number, if not false, adds col-md-.. classes.
+      md: 4,
+      //Accepts: false | number, if not false, adds col-sm-.. classes.
+      sm: false,
+      //Accepts: false | number, if not false, adds col-.. classes.
+      xs: 6,
+    },
+  },
+  //Accepts: object, Settings that apply to the slider
+  slider: {
+    //Accepts: number, The transition duration of the slider (but not photos in the slider) (in ms).
+    transitionDuration: 300,
+    //Accepts: false | true | "desktop" | "mobile", When navigiation buttons should be appeared.
+    navButtons: "desktop",
+    //Accepts: false | true | "desktop" | "mobile", When close button should be appeared.
+    escButton: true,
+    //Accepts: false | true | "desktop" | "mobile", When touch navigiation should be enabled.
+    navTouch: true,
+    //Accepts: false | true | "desktop" | "mobile", When touch navigiation should be enabled.
+    closeViaDrag: true,
+    //Accepts: false | true | "zoom" | "navigation", Whether and what mouse wheel should does.
+    mouseWheel: "zoom",
+    //Accepts: false | true | "desktop" | "mobile", When photos indicator should be appeared.
+    photosIndicator: "desktop",
+    //Accepts: one of predefined name (look below at easing functions), The transition easing photos.
+    photosEasing: "easeOutSine",
+    //Accepts: number, The gap between photos (in px).
+    photosGap: 15,
+    //Accepts: number, The transition duration in the slider photos (in ms).
+    photosTransitionDuration: 300,
+    //Accepts: number, The transition duration of zoom in the slider photos (in ms).
+    zoomTransitionDuration: 200,
+    //Accepts: number, Max a photo zoom.
+    zoomMaxScale: 3,
+    //Accepts: number, The zoom speed.
+    zoomSpeed: 0.25,
+    //Accepts: false | true, if true loop in enabled.
+    loop: true,
+  },
+});
 ```
 
-
-## Create instance of the gallery
-After initialization you can create instance of gallery (or galleries, they're automatically detecting).
-
+## How to use it?
 1. Add `data-vinze-gallery` attribute to the wrapper of the gallery.
 
 ```html
@@ -56,15 +107,16 @@ After initialization you can create instance of gallery (or galleries, they're a
 </div>
 ```
 
-Multiple instances, just like that:
+You can also create multiple instances everywhere do you want:
 
 ```html
 <div data-vinze-gallery>
 </div>
-<div data-vinze-gallery>
-</div>
+<section>
+  <div data-vinze-gallery>
+  </div>
+</section>
 ```
-
 
 2.a) Inside of the parent you can create a structure you like, just put `data-vinze-photo` to each **`<img />`** mark.
 
@@ -86,7 +138,6 @@ For ex.:
 </div>
 ```
 
-
 2.b) If you need basic layout **---(requires bootstrap)---** just create structure where parent of **`<img />`** has `data-vinze-photo-container`:
 
 ```html
@@ -106,75 +157,41 @@ For ex.:
 </div>
 ```
 
-Default layout you can change in javascript (look below).
-
-
-## Sources of photos
-
+## Sources of photos.
 The slider uses `src` attribute in default to render photos, but if you would like have separate sources for thumbnails and for the slider you can use `data-vinze-slider-src`.
 
 ```html
 <img data-vinze-photo src="my-photo-thumbnail.jpg" data-vinze-slider-src="my-photo.jpg" />
 ```
 
+## Easing functions.
 
-## Settings and customization
-
-In default:
-
-```javascript
-vinzeGallery.init({
-  mobileWidthBreakpoint: 500,
-  gallery: {
-    smoothLoad: true,
-    smoothLoadSpeed: 50,
-    photosTransitionDuration: 300,
-    layout: {
-      xl: false,
-      lg: 3,
-      md: 4,
-      sm: false,
-      xs: 6,
-    },
-  },
-  slider: {
-    transitionDuration: 300,
-    navButtons: "desktop",
-    escButton: true,
-    navTouch: true,
-    closeViaDrag: true,
-    mouseWheel: "zoom",
-    photosIndicator: "desktop",
-    photosEasing: "easeOutSine",
-    photosGap: 15,
-    photosTransitionDuration: 300,
-    zoomTransitionDuration: 200,
-    zoomMaxScale: 3,
-    zoomSpeed: 0.25,
-    loop: true,
-    draggingXBreakpoint: 15,
-    draggingYBreakpoint: 15,
-  },
-});
-```
-
-mobileWidthBreakpoint (number):
-The width of the window you want to treat as a mobile breakpoint (You can just leave it as default 500 px).
-
-gallery (object):
-There you can pass values about all your galleries.
-
-gallery -> smoothLoad (boolean):
-false - gallery loads instantly.
-true - gallery loads smoothly.
-
-gallery -> smoothLoadSpeed (number):
-The load interval between each of gallery photos.
-
-gallery -> photosTransitionDuration (number):
-The transition duration of gallery photos.
-
-gallery -> layout (object):
-Layout sizes value.
-
-gallery -> layout -> xl (number):
+* linear,
+* ease,
+* easeIn,
+* easeOut,
+* easeInOut,
+* easeInQuad,
+* easeInCubic,
+* easeInQuart,
+* easeInQuint,
+* easeInSine,
+* easeInExpo,
+* easeInCirc,
+* easeInBack,
+* easeOutQuad,
+* easeOutCubic,
+* easeOutQuart,
+* easeOutQuint,
+* easeOutSine,
+* easeOutExpo,
+* easeOutCirc,
+* easeOutBack,
+* easeInOutQuad,
+* easeInOutCubic,
+* easeInOutQuart,
+* easeInOutQuint,
+* easeInOutSine,
+* easeInOutExpo,
+* easeInOutCirc,
+* easeInOutBack,
