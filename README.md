@@ -3,10 +3,14 @@ Easy and simple-use Javascript photos gallery slider.
 
 I'm not proffesional developer and that isn't even close perfect, but I belive it can be useful for someone. It's just a project for extend my knowledge in javascript.
 
+In future updates are possible.
+
 ![vinzeGallery1](https://user-images.githubusercontent.com/81425879/113610545-91575500-964d-11eb-961e-f8bfc1aa698a.png)
 
 ## What this exactly is?
-Mainly this is a full page slider that can be attached to your images on the website. You can create any structure of gallery you like, stylize it and put up few **data-** attributes, and that's it, the slider should work.
+Mainly this is a full page slider that can be attached to your images on the website.
+You can create any structure of gallery you like and stylize it or use pre-defined attributes for simple gallery and then customize it.
+Just put up few **data-** attributes, optional pass some settings, and that's it.
 
 ## Main features:
 * simple initialize and use,
@@ -153,6 +157,19 @@ For ex.:
   <!-- parent has data-vinze-photo-container -->
   <div data-vinze-photo-container>
     <img data-vinze-photo src="my-photo-3.jpg" />
+  </div>
+</div>
+```
+
+If you'd like add custom bootstrap classes, just add them to `data-vinze-photo-container` elements, for ex.:
+
+```html
+<div data-vinze-gallery>
+  <div data-vinze-photo-container>
+    <img data-vinze-photo src="my-photo.jpg" />
+  </div>
+  <div data-vinze-photo-container class="col-md-4 col-xl-2">
+    <img data-vinze-photo src="my-photo-2.jpg" />
   </div>
 </div>
 ```
