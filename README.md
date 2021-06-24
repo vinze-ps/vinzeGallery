@@ -1,4 +1,5 @@
 ## Vinze Gallery
+
 Easy and simple-use Javascript photos gallery slider.
 
 I'm not proffesional developer and that isn't even close perfect, but I belive it can be useful for someone. It's just a project for extend my knowledge in javascript.
@@ -8,20 +9,23 @@ In future updates are possible.
 ![vinzeGallery1](https://user-images.githubusercontent.com/81425879/113610545-91575500-964d-11eb-961e-f8bfc1aa698a.png)
 
 ## What this exactly is?
+
 Mainly this is a full page slider that can be attached to your images on the website.
 You can create any structure of gallery you like and stylize it or use pre-defined attributes for simple gallery and then customize it.
 Just put up few **data-** attributes, optional pass some settings, and that's it.
 
 ## Main features:
-* simple initialize and use,
-* many posibilities of customization and settings,
-* fully responsive,
-* unlimited instances of galleries on the page,
-* buttons / touch & drag / zoom & move / scroll support in the slider,
-* optional default layout for galleries (requires bootstrap)
+
+- simple initialize and use,
+- many posibilities of customization and settings,
+- fully responsive,
+- unlimited instances of galleries on the page,
+- buttons / touch & drag / zoom & move / scroll support in the slider,
+- optional default layout for galleries (requires bootstrap)
 
 ## Instalation
-First of all attach *css* and *js* files in the **`<head></head>`** mark.
+
+First of all attach _css_ and _js_ files in the **`<head></head>`** mark.
 
 ```css
 <link rel="stylesheet" href="vinzeGallery.min.css" type="text/css" />
@@ -40,6 +44,7 @@ You can also add bootstrap if you'd create gallery layout.
 ```
 
 ## Initialize vinzeGallery.
+
 ```javascript
 vinzeGallery.init();
 
@@ -104,27 +109,26 @@ vinzeGallery.init({
 ```
 
 ## How to use it?
+
 1. Add `data-vinze-gallery` attribute to the wrapper of the gallery.
 
 ```html
-<div data-vinze-gallery>
-</div>
+<div data-vinze-gallery></div>
 ```
 
 You can also create multiple instances everywhere do you want:
 
 ```html
-<div data-vinze-gallery>
-</div>
+<div data-vinze-gallery></div>
 <section>
-  <div data-vinze-gallery>
-  </div>
+  <div data-vinze-gallery></div>
 </section>
 ```
 
 2.a) Inside of the parent you can create a structure you like, just put `data-vinze-photo` to each **`<img />`** mark.
 
 For ex.:
+
 ```html
 <div data-vinze-gallery>
   <div class="some-div">
@@ -175,40 +179,45 @@ If you'd like add custom bootstrap classes, just add them to `data-vinze-photo-c
 ```
 
 ## Sources of photos.
+
 The slider uses `src` attribute in default to render photos, but if you would like have separate sources for thumbnails and for the slider you can use `data-vinze-slider-src`.
 
 ```html
-<img data-vinze-photo src="my-photo-thumbnail.jpg" data-vinze-slider-src="my-photo.jpg" />
+<img
+  data-vinze-photo
+  src="my-photo-thumbnail.jpg"
+  data-vinze-slider-src="my-photo.jpg"
+/>
 ```
 
 ## Easing functions.
 
-* linear,
-* ease,
-* easeIn,
-* easeOut,
-* easeInOut,
-* easeInQuad,
-* easeInCubic,
-* easeInQuart,
-* easeInQuint,
-* easeInSine,
-* easeInExpo,
-* easeInCirc,
-* easeInBack,
-* easeOutQuad,
-* easeOutCubic,
-* easeOutQuart,
-* easeOutQuint,
-* easeOutSine,
-* easeOutExpo,
-* easeOutCirc,
-* easeOutBack,
-* easeInOutQuad,
-* easeInOutCubic,
-* easeInOutQuart,
-* easeInOutQuint,
-* easeInOutSine,
-* easeInOutExpo,
-* easeInOutCirc,
-* easeInOutBack,
+- linear,
+- ease,
+- easeIn,
+- easeOut,
+- easeInOut,
+- easeInQuad,
+- easeInCubic,
+- easeInQuart,
+- easeInQuint,
+- easeInSine,
+- easeInExpo,
+- easeInCirc,
+- easeInBack,
+- easeOutQuad,
+- easeOutCubic,
+- easeOutQuart,
+- easeOutQuint,
+- easeOutSine,
+- easeOutExpo,
+- easeOutCirc,
+- easeOutBack,
+- easeInOutQuad,
+- easeInOutCubic,
+- easeInOutQuart,
+- easeInOutQuint,
+- easeInOutSine,
+- easeInOutExpo,
+- easeInOutCirc,
+- easeInOutBack,
