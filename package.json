@@ -2,7 +2,7 @@
   "name": "vinze-gallery",
   "version": "1.0.0",
   "description": "Javascript gallery and the photos slider.",
-  "main": "vinzeGallery.min.js",
+  "main": "vinzeGallery.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
