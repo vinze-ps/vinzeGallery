@@ -1238,3 +1238,5 @@ const vinzeGallery = {
     });
   },
 };
+
+export default vinzeGallery;
