@@ -25,6 +25,8 @@ Just put up few **data-** attributes, optional pass some settings, and that's it
 
 ## Instalation
 
+`npm install vinze-gallery`
+
 First of all attach _css_ and _js_ files in the **`<head></head>`** mark.
 
 ```css
