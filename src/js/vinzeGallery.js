@@ -50,8 +50,8 @@
             smoothLoad: true,
             smoothLoadTick: 200,
             photosTransitionDuration: 200,
-            photosEasing: "easeOutSine",
-            photosGap: null,
+            photosEasing: Easings.easeOutSine,
+            photosGap: 5,
             layout: null,
         },
         slider: {
@@ -195,8 +195,6 @@
             this.generate();
             // Generate photos.
             this.photos().generate();
-            // Add events.
-            this.events().add();
             // Show the slider with a little delay.
             utils.timeout("set", "vinze-gallery-slider-show", 100, () => {
                 this.show();
@@ -228,10 +226,9 @@
          * Shows the slider.
          */
         show() {
-            let bodyElement = document.querySelector("body");
             // Set the slider transition property style.
             this.sliderElement.style.transitionDuration = this.properties.transitionDuration + "ms";
-            bodyElement.classList.add("overflow-hidden");
+            document.querySelector("body").classList.add("overflow-hidden");
             this.sliderElement.classList.add("active");
             this.updateContext();
         }
@@ -286,7 +283,9 @@
             this.sliderElement.classList.remove("active");
             utils.timeout("set", "vinze-gallery-slider-remove", this.properties.transitionDuration, () => {
                 this.sliderElement.remove();
+                console.log(utils.events);
                 this.events().remove();
+                console.log(utils.events);
             });
         }
         /**
@@ -299,7 +298,8 @@
                  */
                 add: () => {
                     // Close the slider with the close button.
-                    utils.select(this.sliderElement.querySelector("button.close")).on("click", () => this.close(), null, "vinze-gallery-slider-close-button");
+                    utils.select(this.sliderElement.querySelector("button.close"))
+                        .on("click", () => this.close(), null, "vinze-gallery-slider-close-button");
                     utils.select(document).on("keydown", (event) => {
                         event = event || window.event;
                         let isEscape = false;
@@ -326,8 +326,10 @@
                             this.actions().change().forward();
                     }, null, "vinze-gallery-slider-keydown");
                     // Navigation buttons events.
-                    utils.select(this.sliderElement.querySelector("button.backward")).on("click", () => this.actions().change().backward(), null, "vinze-gallery-slider-backward-button");
-                    utils.select(this.sliderElement.querySelector("button.forward")).on("click", () => this.actions().change().forward(), null, "vinze-gallery-slider-forward-button");
+                    utils.select(this.sliderElement.querySelector("button.backward"))
+                        .on("click", () => this.actions().change().backward(), null, "vinze-gallery-slider-backward-button");
+                    utils.select(this.sliderElement.querySelector("button.forward"))
+                        .on("click", () => this.actions().change().forward(), null, "vinze-gallery-slider-forward-button");
                     // Photos events.
                     // Scroll zoom.
                     if (this.properties.mouseWheel === "zoom") {
@@ -342,6 +344,18 @@
                                             this.actions().zoom().out();
                                         }
                                 });
+                            });
+                        });
+                    }
+                    else if (this.properties.mouseWheel === "navigation") {
+                        this.photos().get().photo().forEach((photo) => {
+                            utils.select(photo).on("mousewheel", (event) => {
+                                if (event.wheelDelta / 120 > 0) {
+                                    this.actions().change().forward();
+                                }
+                                else {
+                                    this.actions().change().backward();
+                                }
                             });
                         });
                     }
@@ -704,13 +718,13 @@
                         this.state.previousTranslateY = 0;
                         // Unzoom.
                         // TODO
-                        this.actions().zoom().out(true);
-                        // this.state.zoom = false;
-                        // this.photos().setDefaultTransforms();
-                        // if (this.state.zoom && (this.properties.photosIndicator === true || this.properties.photosIndicator === this.currentContext))
-                        //     utils.select(this.sliderElement!.querySelector(`[data-vinze-photo-indicator]`)!).addClass("hidden");
-                        // else if (!this.state.zoom && (this.properties.photosIndicator === true || this.properties.photosIndicator === this.currentContext))
-                        //     utils.select(this.sliderElement!.querySelector(`[data-vinze-photo-indicator]`)!).removeClass("hidden");
+                        // this.actions().zoom().out(true);
+                        this.state.zoom = false;
+                        this.photos().setDefaultTransforms();
+                        if (this.state.zoom && (this.properties.photosIndicator === true || this.properties.photosIndicator === this.currentContext))
+                            utils.select(this.sliderElement.querySelector(`[data-vinze-photo-indicator]`)).addClass("hidden");
+                        else if (!this.state.zoom && (this.properties.photosIndicator === true || this.properties.photosIndicator === this.currentContext))
+                            utils.select(this.sliderElement.querySelector(`[data-vinze-photo-indicator]`)).removeClass("hidden");
                         // Photos indicator.
                         this.sliderElement.querySelector("[data-vinze-photo-indicator]").innerHTML = `${this.currentPhotoIndex + 1} of ${this.photos().get().photo().length}`;
                         // Change the transitions of all photos without that currently changing.

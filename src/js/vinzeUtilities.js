@@ -12,6 +12,7 @@
     ("use strict");
 
     const Vinze = (function () {
+        
         var Vinze = /** @class */ (function () {
             function Vinze() {
                 var _this = this;
@@ -351,10 +352,10 @@
                             return true;
                         });
                         // Remove events.
-                        _events.forEach(function (event, index) {
-                            event.element.removeEventListener(event.type, event.listener, event.useCapture);
-                            _this.events.splice(index, 1);
-                        });
+                        for (var i = _events.length - 1; i >= 0; i--) {
+                            _events[i].element.removeEventListener(_events[i].type, _events[i].listener, _events[i].useCapture);
+                            _this.events.splice(i, 1);
+                        }
                         return _this.select(selector);
                     },
                     width: function () {
