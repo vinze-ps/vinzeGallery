@@ -57,59 +57,86 @@ VinzeGallery.init();
 // You can pass optional settings as object (the default values are shown).
 
 const gallery = VinzeGallery(null, {
-  //Accepts: number, The width of the window you want to treat as a mobile breakpoint (in px).
-  mobileWidthBreakpoint: 500,
-  //Accepts: object, Settings that apply to all galleries.
+  // Accepts: a number, The width of the window you want to treat as a mobile breakpoint (in px).
+  mobileBreakpoint: 500,
+  
+  // Accepts: object, Settings that apply to galleries of the instance.
   gallery: {
-    //Accepts: boolean, If true galleries loads smoothly, false - loads instantly.
+    // Accepts: a boolean, If true, photos in galleries loads smoothly, false - loads instantly.
     smoothLoad: true,
-    //Accepts: number, The load interval between each of gallery photos (in ms).
-    smoothLoadSpeed: 50,
-    //Accepts: number, The transition duration of galleries photos (in ms).
-    photosTransitionDuration: 300,
-    //Accepts: object, Default layout in different sizes (requires bootstrap and appropriate structure, look at "how to use it?" at 2.b)).
+    
+    // Accepts: a number, The load interval between each of gallery photos (in ms).
+    smoothLoadTick: 200,
+    
+    // Accepts: a number, The transition duration of a galleries photos (in ms).
+    photosTransitionDuration: 200,
+    
+    // Accepts: null | number, Padding, margin between photos in the instance galleries.
+    photosGap: null,
+    
+    // Accepts: an object | null, Default layout in different sizes (requires bootstrap and appropriate structure, look at "how to use it?" at the 2 point)).
+    // If null, nothing will happen
     layout: {
-      //Accepts: false | number, if not false, adds col-xl-.. classes.
-      xl: false,
-      //Accepts: false | number, if not false, adds col-lg-.. classes.
-      lg: 3,
-      //Accepts: false | number, if not false, adds col-md-.. classes.
-      md: 4,
-      //Accepts: false | number, if not false, adds col-sm-.. classes.
-      sm: false,
-      //Accepts: false | number, if not false, adds col-.. classes.
-      xs: 6,
+      //Accepts: null | number, if not null, adds col-xl-.. classes.
+      xl: null,
+      
+      //Accepts: null | number, if not null, adds col-lg-.. classes.
+      lg: null,
+      
+      //Accepts: null | number, if not null, adds col-md-.. classes.
+      md: null,
+      
+      //Accepts: null | number, if not null, adds col-sm-.. classes.
+      sm: null,
+      
+      //Accepts: null | number, if not null, adds col-.. classes.
+      xs: null,
     },
   },
-  //Accepts: object, Settings that apply to the slider
+  
+  // Accepts: an object, Settings that apply to the slider.
   slider: {
-    //Accepts: number, The transition duration of the slider (but not photos in the slider) (in ms).
-    transitionDuration: 300,
-    //Accepts: false | true | "desktop" | "mobile", When navigiation buttons should be appeared.
+    // Accepts: a number, The transition duration of the slider (but not photos in the slider) (in ms).
+    transitionDuration: 200,
+    
+    // Accepts: a boolean | "desktop" | "mobile", When navigiation buttons should be appeared.
     navButtons: "desktop",
-    //Accepts: false | true | "desktop" | "mobile", When close button should be appeared.
+    
+    // Accepts: a boolean | "desktop" | "mobile", When close button should be appeared.
     escButton: true,
-    //Accepts: false | true | "desktop" | "mobile", When touch navigiation should be enabled.
+    
+    // Accepts: a boolean| "desktop" | "mobile", When touch navigiation should be enabled.
     navTouch: true,
-    //Accepts: false | true | "desktop" | "mobile", When touch navigiation should be enabled.
+    
+    // Accepts: a boolean | "desktop" | "mobile", When touch navigiation should be enabled.
     closeViaDrag: true,
-    //Accepts: false | true | "zoom" | "navigation", Whether and what mouse wheel should does.
+    
+    // DOESN'T WORK YET.
+    // Accepts: a boolean | "zoom" | "navigation", Whether and what mouse wheel should does.
     mouseWheel: "zoom",
-    //Accepts: false | true | "desktop" | "mobile", When photos indicator should be appeared.
+    
+    // Accepts: a boolean | "desktop" | "mobile", When photos indicator should be appeared.
     photosIndicator: "desktop",
-    //Accepts: one of predefined name (look below at easing functions), The transition easing photos.
+    
+    // Accepts: One of a predefined string name (look below at easing functions), The transition easing photos.
     photosEasing: "easeOutSine",
-    //Accepts: number, The gap between photos (in px).
+    
+    // Accepts: a number, The gap between photos (in px).
     photosGap: 15,
-    //Accepts: number, The transition duration in the slider photos (in ms).
-    photosTransitionDuration: 300,
-    //Accepts: number, The transition duration of zoom in the slider photos (in ms).
+    
+    // Accepts: a number, The transition duration in the slider photos (in ms).
+    photosTransitionDuration: 200,
+    
+    // Accepts: a number, The transition duration of zoom in the slider photos (in ms).
     zoomTransitionDuration: 200,
-    //Accepts: number, Max a photo zoom.
+    
+    // Accepts: a number, Max a photo zoom.
     zoomMaxScale: 3,
-    //Accepts: number, The zoom speed.
+    
+    // Accepts: a number, The zoom speed.
     zoomSpeed: 0.25,
-    //Accepts: false | true, if true loop in enabled.
+    
+    // Accepts: a boolean, if true loop in enabled.
     loop: true,
   },
 });
