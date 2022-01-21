@@ -11,12 +11,12 @@
     <!-- Gallery + Vinze Utilities -->
 
     <link rel="stylesheet" href="src/css/vinzeGallery.css">
-    <!-- <script src="src/js/vinzeUtilities.js"></script>
-    <script src="src/js/vinzeGallery.js"></script> -->
+    <script src="src/js/vinzeUtilities.js"></script>
+    <script src="src/js/vinzeGallery.js"></script>
 
     <!-- DEV -->
 
-    <script type="module" src="src/js/vinzeGallery/vinzeGallery_dev.js"></script>
+    <!-- <script type="module" src="src/js/vinzeGallery/vinzeGallery_dev.js"></script> -->
 
     <style type="text/css">
         * {
@@ -98,31 +98,31 @@
     </div>
 
     <!-- DEV -->
-    <script type="module" src="src/js/index.js"></script>
+    <!-- <script type="module" src="src/js/index.js"></script> -->
 
     <script type="text/javascript">
 
-        // // If the first parameter is null / undefined - initialize all found galleries by data attr.
-        // // The first parameter also can be a string with a specific name of the gallery.
+        // If the first parameter is null / undefined - initialize all found galleries by data attr.
+        // The first parameter also can be a string with a specific name of the gallery.
 
-        // let gallery = new VinzeGallery("test", {
-        //     gallery: {
-        //         photosGap: 5,
-        //     },
-        // });
+        let gallery = new VinzeGallery("test", {
+            gallery: {
+                photosGap: 5,
+            },
+        });
 
-        // // !!! Initialize.
+        // !!! Initialize.
 
-        // gallery.init();
+        gallery.init();
 
-        // let gallery2 = new VinzeGallery("test2", {
-        //     gallery: {
-        //         photosGap: 5,
-        //         smoothLoadTick: 400,
-        //     },
-        // });
+        let gallery2 = new VinzeGallery("test2", {
+            gallery: {
+                photosGap: 5,
+                smoothLoadTick: 400,
+            },
+        });
 
-        // gallery2.init();
+        gallery2.init();
     </script>
 
 </body>
