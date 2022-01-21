@@ -2,34 +2,35 @@
 
 Easy and simple-use Javascript photos gallery slider.
 
-I'm not proffesional developer and that isn't even close perfect, but I belive it can be useful for someone. It's just a project for extend my knowledge in javascript.
-
 In future updates are possible.
 
 ![vinzeGallery1](https://user-images.githubusercontent.com/81425879/113610545-91575500-964d-11eb-961e-f8bfc1aa698a.png)
 
 ## What this exactly is?
 
-Mainly this is a full page slider that can be attached to your images on the website.
-You can create any structure of gallery you like and stylize it or use pre-defined attributes for simple gallery and then customize it.
-Just put up few **data-** attributes, optional pass some settings, and that's it.
+Basicly this is a simple-use gallery & slider script.
+
+In a short - All you can do is attach neccessary scripts, style sheets and put up few **data-** attributes.
+Nothing stands in the way of customize what and how you want.
 
 ## Main features:
 
-- simple initialize and use,
-- many posibilities of customization and settings,
-- fully responsive,
-- unlimited instances of galleries on the page,
-- buttons / touch & drag / zoom & move / scroll support in the slider,
-- optional default layout for galleries (requires bootstrap)
+- Simple initialize and use,
+- Many posibilities of customization and settings,
+- Fully responsive,
+- Unlimited instances of galleries on the page,
+- Navigation buttons & exit button / Photos indicator / Touch & drag support / Zoom & move,
+- Optional default layout for galleries (but requires the bootstrap).
 
 ## Instalation
 
 First of all attach _css_ and _js_ files in the **`<head></head>`** mark.
 
 ```css
-<link rel="stylesheet" href="vinzeGallery.min.css" type="text/css" />
-<script src="vinzeGallery.min.js"></script>
+<link rel="stylesheet" href="vinzeGallery.css" type="text/css" />
+<!-- Gallery always requires the Vinze Utilities script, which you can find on my GitHub profile -->
+<script src="vinzeUtilities.js" type="text/javascript"></script>
+<script src="vinzeGallery.js" type="text/javascript"></script>
 ```
 
 You can also add bootstrap if you'd create gallery layout.
@@ -46,10 +47,16 @@ You can also add bootstrap if you'd create gallery layout.
 ## Initialize vinzeGallery.
 
 ```javascript
-vinzeGallery.init();
 
-//You can pass optional settings as object (the default values are shown).
-vinzeGallery.init({
+// The first parameter is a name of a specific gallery in the **data-vinze-gallery="NAME"** attribute.
+// The first parameter can have also a null / undefined value, then after all galleries with the **data-vinze-gallery** attribute will be initialize.
+
+const gallery = VinzeGallery();
+VinzeGallery.init();
+
+// You can pass optional settings as object (the default values are shown).
+
+const gallery = VinzeGallery(null, {
   //Accepts: number, The width of the window you want to treat as a mobile breakpoint (in px).
   mobileWidthBreakpoint: 500,
   //Accepts: object, Settings that apply to all galleries.
@@ -106,26 +113,27 @@ vinzeGallery.init({
     loop: true,
   },
 });
+VinzeGallery.init();
 ```
 
 ## How to use it?
 
-1. Add `data-vinze-gallery` attribute to the wrapper of the gallery.
+1. Add the `data-vinze-gallery` attribute to the wrapper of the gallery.
 
 ```html
 <div data-vinze-gallery></div>
 ```
 
-You can also create multiple instances everywhere do you want:
+You can also create multiple instances everywhere you want:
 
 ```html
 <div data-vinze-gallery></div>
 <section>
-  <div data-vinze-gallery></div>
+  <div data-vinze-gallery="OPTIONAL_NAME"></div>
 </section>
 ```
 
-2.a) Inside of the parent you can create a structure you like, just put `data-vinze-photo` to each **`<img />`** mark.
+2. Inside of the parent you can create a structure you like, but each **`<img />`** must have the `data-vinze-photo` attribute and parent with the `data-vinze-photo-container` attribute (NOTE: container of a photo does not have to be an immediate parent, it can be higher up in the structure).
 
 For ex.:
 
@@ -133,34 +141,21 @@ For ex.:
 <div data-vinze-gallery>
   <div class="some-div">
     <div class="another-one">
-      <!-- just put data-vinze-photo to the img -->
-      <img data-vinze-photo src="my-photo.jpg" />
+      <!-- Image container. -->
+      <div data-vinze-photo-container>
+        <!-- img with the data-vinze-photo attribute. -->
+        <img data-vinze-photo src="my-photo.jpg" />
+      </div>
     </div>
   </div>
   <div class="some-div">
-    <div class="another-one">
-      <!-- just put data-vinze-photo to the img -->
-      <img data-vinze-photo src="my-photo-2.jpg" />
+    <!-- Image container. -->
+    <div data-vinze-photo-container>
+      <div class="another-one">
+        <!-- img with the data-vinze-photo attribute. -->
+        <img data-vinze-photo src="my-photo-2.jpg" />
+      </div>
     </div>
-  </div>
-</div>
-```
-
-2.b) If you need basic layout **---(requires bootstrap)---** just create structure where parent of **`<img />`** has `data-vinze-photo-container`:
-
-```html
-<div data-vinze-gallery>
-  <!-- parent has data-vinze-photo-container -->
-  <div data-vinze-photo-container>
-    <img data-vinze-photo src="my-photo.jpg" />
-  </div>
-  <!-- parent has data-vinze-photo-container -->
-  <div data-vinze-photo-container>
-    <img data-vinze-photo src="my-photo-2.jpg" />
-  </div>
-  <!-- parent has data-vinze-photo-container -->
-  <div data-vinze-photo-container>
-    <img data-vinze-photo src="my-photo-3.jpg" />
   </div>
 </div>
 ```
