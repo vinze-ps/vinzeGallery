@@ -11,6 +11,16 @@
   })(this, function () {
     ("use strict");
 
+    var utils;
+    
+    (function() {
+        try {
+            utils = new Vinze();
+        } catch {
+            console.warn("%c Error: Cannot find Vinze Utilities, go to https://github.com/vinze-ps/vinzeUtilities and attach it before Vinze Gallery. ", 'background: #111; color: #9bd4fa');
+        }
+    })();
+
     const initialProperties = {
         mobileBreakpoint: 500,
         gallery: {
@@ -40,16 +50,6 @@
             draggingYBreakpoint: 15,
         },
     };
-
-    var utils;
-    
-    (function() {
-        try {
-            utils = new Vinze();
-        } catch {
-            console.warn("%c Error: Cannot find Vinze Utilities, go to https://github.com/vinze-ps/vinzeUtilities and attach it before Vinze Gallery. ", 'background: #111; color: #9bd4fa');
-        }
-    })();
 
     class VGGallery {
         constructor(element, properties) {
