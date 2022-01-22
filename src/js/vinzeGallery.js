@@ -11,46 +11,13 @@
   })(this, function () {
     ("use strict");
 
-    var Easings;
-    (function (Easings) {
-        Easings["linear"] = "cubic-bezier(0, 0, 1, 1)";
-        Easings["ease"] = "cubic-bezier(0.25, 0.1, 0.25, 1)";
-        Easings["easeIn"] = "cubic-bezier(0.42, 0, 1, 1)";
-        Easings["easeOut"] = "cubic-bezier(0, 0, 0.58, 1)";
-        Easings["easeInOut"] = "cubic-bezier(0.42, 0, 0.58, 1)";
-        Easings["easeInQuad"] = "cubic-bezier(0.550, 0.085, 0.680, 0.530)";
-        Easings["easeInCubic"] = "cubic-bezier(0.550, 0.055, 0.675, 0.190)";
-        Easings["easeInQuart"] = "cubic-bezier(0.895, 0.030, 0.685, 0.220)";
-        Easings["easeInQuint"] = "cubic-bezier(0.755, 0.050, 0.855, 0.060)";
-        Easings["easeInSine"] = "cubic-bezier(0.470, 0.000, 0.745, 0.715)";
-        Easings["easeInExpo"] = "cubic-bezier(0.950, 0.050, 0.795, 0.035)";
-        Easings["easeInCirc"] = "cubic-bezier(0.600, 0.040, 0.980, 0.335)";
-        Easings["easeInBack"] = "cubic-bezier(0.600, -0.280, 0.735, 0.045)";
-        Easings["easeOutQuad"] = "cubic-bezier(0.250, 0.460, 0.450, 0.940)";
-        Easings["easeOutCubic"] = "cubic-bezier(0.215, 0.610, 0.355, 1.000)";
-        Easings["easeOutQuart"] = "cubic-bezier(0.165, 0.840, 0.440, 1.000)";
-        Easings["easeOutQuint"] = "cubic-bezier(0.230, 1.000, 0.320, 1.000)";
-        Easings["easeOutSine"] = "cubic-bezier(0.390, 0.575, 0.565, 1.000)";
-        Easings["easeOutExpo"] = "cubic-bezier(0.190, 1.000, 0.220, 1.000)";
-        Easings["easeOutCirc"] = "cubic-bezier(0.075, 0.820, 0.165, 1.000)";
-        Easings["easeOutBack"] = "cubic-bezier(0.175, 0.885, 0.320, 1.275)";
-        Easings["easeInOutQuad"] = "cubic-bezier(0.455, 0.030, 0.515, 0.955)";
-        Easings["easeInOutCubic"] = "cubic-bezier(0.645, 0.045, 0.355, 1.000)";
-        Easings["easeInOutQuart"] = "cubic-bezier(0.770, 0.000, 0.175, 1.000)";
-        Easings["easeInOutQuint"] = "cubic-bezier(0.860, 0.000, 0.070, 1.000)";
-        Easings["easeInOutSine"] = "cubic-bezier(0.445, 0.050, 0.550, 0.950)";
-        Easings["easeInOutExpo"] = "cubic-bezier(1.000, 0.000, 0.000, 1.000)";
-        Easings["easeInOutCirc"] = "cubic-bezier(0.785, 0.135, 0.150, 0.860)";
-        Easings["easeInOutBack"] = "cubic-bezier(0.680, -0.550, 0.265, 1.550)";
-    })(Easings || (Easings = {}));
-
     const initialProperties = {
         mobileBreakpoint: 500,
         gallery: {
             smoothLoad: true,
             smoothLoadTick: 200,
             photosTransitionDuration: 200,
-            photosEasing: Easings.easeOutSine,
+            photosEasing: utils.easings.easeOutSine,
             photosGap: 5,
             layout: null,
         },
@@ -62,7 +29,7 @@
             closeViaDrag: true,
             photosIndicator: "desktop",
             photosGap: 15,
-            photosEasing: Easings.easeInOutSine,
+            photosEasing: utils.easings.easeInOutSine,
             mouseWheel: "zoom",
             photosTransitionDuration: 200,
             zoomTransitionDuration: 200,
@@ -100,7 +67,7 @@
                 // Transitions.
                 photo.style.transitionProperty = "transform, opacity";
                 photo.style.transitionDuration = `${this.properties.photosTransitionDuration}ms`;
-                photo.style.transitionTimingFunction = Easings[(this.properties.photosEasing ? this.properties.photosEasing : "ease")];
+                photo.style.transitionTimingFunction = utils.easings[(this.properties.photosEasing ? this.properties.photosEasing : "ease")];
                 // Set the gap between photos.
                 if (this.properties.photosGap) {
                     photo.style.margin = this.properties.photosGap + "px 0 0 0";
@@ -441,9 +408,9 @@
                         let photoImg = photo.querySelector(`img`);
                         // Transitions.
                         photo.style.transitionDuration = this.properties.photosTransitionDuration + "ms";
-                        photo.style.transitionTimingFunction = Easings[this.properties.photosEasing];
+                        photo.style.transitionTimingFunction = utils.easings[this.properties.photosEasing];
                         photoImg.style.transitionDuration = this.properties.photosTransitionDuration + "ms";
-                        photoImg.style.transitionTimingFunction = Easings[this.properties.photosEasing];
+                        photoImg.style.transitionTimingFunction = utils.easings[this.properties.photosEasing];
                     });
                     // Update position classes.
                     this.photos().updatePositionClasses();
@@ -1013,20 +980,20 @@
                     this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionDuration = this.properties.zoomTransitionDuration + "ms";
                     // Set the transition timing function.
                     if (this.state.zoom) {
-                        this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = Easings.ease;
+                        this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = utils.easings.ease;
                     }
                     else {
-                        if (Easings[this.properties.photosEasing] !== undefined)
-                            this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = Easings[this.properties.photosEasing];
+                        if (utils.easings[this.properties.photosEasing] !== undefined)
+                            this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = utils.easings[this.properties.photosEasing];
                         else
-                            this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = Easings.ease;
+                            this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = utils.easings.ease;
                     }
                     utils.timeout("clear", "vinze-gallery-slider-zoom");
                     utils.timeout("set", "vinze-gallery-slider-zoom", this.properties.zoomTransitionDuration, () => {
                         // Set the default transition duration.
                         this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionDuration = this.properties.photosTransitionDuration + "ms";
                         // Set the default transition timing function.
-                        this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = Easings[this.properties.photosEasing];
+                        this.photos().get().photoImg(this.currentPhotoIndex)[0].style.transitionTimingFunction = utils.easings[this.properties.photosEasing];
                     });
                     return {
                         in: () => {
