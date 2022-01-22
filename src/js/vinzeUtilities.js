@@ -16,7 +16,7 @@
         var Vinze = /** @class */ (function () {
             function Vinze() {
                 var _this = this;
-                this.easing = {
+                this.easings = {
                     linear: "cubic-bezier(0, 0, 1, 1)",
                     ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
                     easeIn: "cubic-bezier(0.42, 0, 1, 1)",
