@@ -24,6 +24,9 @@ Nothing stands in the way of customize what and how you want.
 
 ## Instalation
 
+npm:
+`npm install git+https://github.com/vinze-ps/vinzeGallery.git`
+
 First of all attach _css_ and _js_ files in the **`<head></head>`** mark.
 
 ```css
