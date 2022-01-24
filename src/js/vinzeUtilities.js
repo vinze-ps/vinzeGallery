@@ -235,11 +235,11 @@
             };
             Vinze.prototype.select = function (selector) {
                 var _this = this;
-                if (selector === null)
-                    return undefined;
                 var nodeList;
                 if (typeof selector === "string")
                     nodeList = document.querySelectorAll(selector);
+                else if (selector === null || selector === undefined)
+                    nodeList = [];
                 else
                     nodeList = [selector];
                 return {
@@ -488,7 +488,7 @@
                 };
             };
             return Vinze;
-        }());
+        }());                     
   
       return Vinze;
     })();

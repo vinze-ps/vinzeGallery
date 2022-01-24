@@ -54,8 +54,8 @@
     class VGGallery {
         constructor(element, properties) {
             this.galleryElement = element;
-            this.properties = properties.gallery;
-            this.sliderProperties = properties;
+            this.properties = utils.objectAssign(Object.create({}), JSON.parse(JSON.stringify(initialProperties.gallery)), properties.gallery);
+            this.sliderProperties = utils.objectAssign(Object.create({}), JSON.parse(JSON.stringify(initialProperties)), properties);
             // Load the gallery.
             if (this.galleryElement)
                 this.load();
@@ -146,9 +146,9 @@
                 startInsideBottom: 0,
                 startInsideLeft: 0,
             };
-            this.properties = properties.slider;
+            this.properties = utils.objectAssign(Object.create({}), JSON.parse(JSON.stringify(initialProperties.slider)), properties.slider);
             this.properties.loop = this.properties.loop && this.galleryElement.querySelectorAll("[data-vinze-photo]").length > 2;
-            this.mobileBreakpoint = properties.mobileBreakpoint;
+            this.mobileBreakpoint = utils.objectAssign(Object.create({}), JSON.parse(JSON.stringify(initialProperties.mobileBreakpoint)), properties.mobileBreakpoint);
             this.currentContext = undefined;
             // Initialize.
             this.init();
@@ -249,9 +249,7 @@
             this.sliderElement.classList.remove("active");
             utils.timeout("set", "vinze-gallery-slider-remove", this.properties.transitionDuration, () => {
                 this.sliderElement.remove();
-                console.log(utils.events);
                 this.events().remove();
-                console.log(utils.events);
             });
         }
         /**
@@ -426,6 +424,8 @@
                         translateY: 0,
                         scale: 1,
                     });
+                    // Update buttons classes.
+                    this.photos().updateButtonClasses();
                 },
                 /**
                  * Returns methods and properties which helps with handle photos, gets them indexes etc.
@@ -486,6 +486,28 @@
                             img.setAttribute("src", img.getAttribute("data-vinze-photo-src"));
                     });
                 },
+                updateButtonClasses: () => {
+                    if (!this.properties.loop) {
+                        if (this.photos().get().lastPhotoIndex + 1 > 1) {
+                            if (this.currentPhotoIndex === this.photos().get().lastPhotoIndex) {
+                                this.sliderElement.querySelector("button.forward").classList.add("disable");
+                                this.sliderElement.querySelector("button.backward").classList.remove("disable");
+                            }
+                            if (this.currentPhotoIndex === 0) {
+                                this.sliderElement.querySelector("button.backward").classList.add("disable");
+                                this.sliderElement.querySelector("button.forward").classList.remove("disable");
+                            }
+                        }
+                        else {
+                            this.sliderElement.querySelector("button.backward").classList.add("disable");
+                            this.sliderElement.querySelector("button.forward").classList.add("disable");
+                        }
+                    }
+                    else {
+                        this.sliderElement.querySelector("button.forward").classList.remove("disable");
+                        this.sliderElement.querySelector("button.backward").classList.remove("disable");
+                    }
+                },
                 /**
                  * Updates classes responsible for the location of photos.
                  */
@@ -498,19 +520,19 @@
                         photo.classList.remove("previous");
                     });
                     // Current is the first photo.
-                    if (this.currentPhotoIndex === 0) {
-                        this.photos().get().photo(this.currentPhotoIndex + 1)[0].classList.add("next");
-                        this.photos().get().photo(this.photos().get().lastPhotoIndex)[0].classList.add("previous");
+                    if (this.currentPhotoIndex === 0 && this.photos().get().lastPhotoIndex > 2) {
+                        utils.select(this.photos().get().photo(this.currentPhotoIndex + 1)[0]).addClass("next");
+                        utils.select(this.photos().get().photo(this.photos().get().lastPhotoIndex)[0]).addClass("previous");
                         // Current is the last photo.
                     }
-                    else if (this.currentPhotoIndex === this.photos().get().lastPhotoIndex) {
-                        this.photos().get().photo(this.currentPhotoIndex - 1)[0].classList.add("previous");
-                        this.photos().get().photo(0)[0].classList.add("next");
+                    else if (this.currentPhotoIndex === this.photos().get().lastPhotoIndex && this.photos().get().lastPhotoIndex > 2) {
+                        utils.select(this.photos().get().photo(this.currentPhotoIndex - 1)[0]).addClass("previous");
+                        utils.select(this.photos().get().photo(0)[0]).addClass("next");
                         // Current is some middle photo.
                     }
                     else {
-                        this.photos().get().photo(this.currentPhotoIndex + 1)[0].classList.add("next");
-                        this.photos().get().photo(this.currentPhotoIndex - 1)[0].classList.add("previous");
+                        utils.select(this.photos().get().photo(this.currentPhotoIndex + 1)[0]).addClass("next");
+                        utils.select(this.photos().get().photo(this.currentPhotoIndex - 1)[0]).addClass("previous");
                     }
                 },
                 /**
@@ -677,6 +699,8 @@
                 change: () => {
                     let _previousIndex = this.currentPhotoIndex;
                     const _change = () => {
+                        // Update buttons classes.
+                        this.photos().updateButtonClasses();
                         // Set the changing state to true.
                         this.state.changing = true;
                         // Reset the previous translates.
@@ -725,13 +749,6 @@
                                     : this.currentPhotoIndex - 1 < 0
                                         ? this.currentPhotoIndex
                                         : this.currentPhotoIndex - 1;
-                            // Navigation buttons diable classes.
-                            if (!this.properties.loop && this.currentPhotoIndex === 0)
-                                this.sliderElement.querySelector("button.backward").classList.add("disable");
-                            else {
-                                this.sliderElement.querySelector("button.backward").classList.remove("disable");
-                                this.sliderElement.querySelector("button.forward").classList.remove("disable");
-                            }
                             _change();
                         },
                         forward: () => {
@@ -746,13 +763,6 @@
                                     : this.currentPhotoIndex + 1 > this.photos().get().lastPhotoIndex
                                         ? this.currentPhotoIndex
                                         : this.currentPhotoIndex + 1;
-                            // Navigation buttons diable classes.
-                            if (!this.properties.loop && this.currentPhotoIndex === this.photos().get().lastPhotoIndex)
-                                this.sliderElement.querySelector("button.forward").classList.add("disable");
-                            else {
-                                this.sliderElement.querySelector("button.forward").classList.remove("disable");
-                                this.sliderElement.querySelector("button.backward").classList.remove("disable");
-                            }
                             _change();
                         },
                     };
