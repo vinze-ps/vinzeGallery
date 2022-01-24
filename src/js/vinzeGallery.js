@@ -520,12 +520,12 @@
                         photo.classList.remove("previous");
                     });
                     // Current is the first photo.
-                    if (this.currentPhotoIndex === 0 && this.photos().get().lastPhotoIndex > 2) {
+                    if (this.currentPhotoIndex === 0 && this.photos().get().lastPhotoIndex + 1 > 2) {
                         utils.select(this.photos().get().photo(this.currentPhotoIndex + 1)[0]).addClass("next");
                         utils.select(this.photos().get().photo(this.photos().get().lastPhotoIndex)[0]).addClass("previous");
                         // Current is the last photo.
                     }
-                    else if (this.currentPhotoIndex === this.photos().get().lastPhotoIndex && this.photos().get().lastPhotoIndex > 2) {
+                    else if (this.currentPhotoIndex === this.photos().get().lastPhotoIndex && this.photos().get().lastPhotoIndex + 1 > 2) {
                         utils.select(this.photos().get().photo(this.currentPhotoIndex - 1)[0]).addClass("previous");
                         utils.select(this.photos().get().photo(0)[0]).addClass("next");
                         // Current is some middle photo.
