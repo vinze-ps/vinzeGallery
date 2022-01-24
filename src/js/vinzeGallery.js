@@ -61,9 +61,8 @@
                 this.load();
         }
         load() {
-            let photosContainerNodeList = this.galleryElement.querySelectorAll("[data-vinze-photo-container]");
-            photosContainerNodeList.forEach((container, index) => {
-                let photo = container.querySelectorAll("[data-vinze-photo]")[0];
+            let photosNodeList = this.galleryElement.querySelectorAll("[data-vinze-photo]");
+            photosNodeList.forEach((photo, index) => {
                 // Transitions.
                 photo.style.transitionProperty = "transform, opacity";
                 photo.style.transitionDuration = `${this.properties.photosTransitionDuration}ms`;
