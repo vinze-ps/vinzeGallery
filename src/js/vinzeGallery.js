@@ -4,11 +4,11 @@
 
 (function (global, factory) {
     typeof exports === "object" && typeof module !== "undefined"
-      ? (module.exports = factory())
+      ? (module.exports = factory(require("vinzeutilities")))
       : typeof define === "function" && define.amd
-      ? define(factory)
-      : ((global = typeof globalThis !== "undefined" ? globalThis : global || self), (global.VinzeGallery = factory()));
-  })(this, function () {
+      ? define(["vinzeutilities"], factory)
+      : ((global = typeof globalThis !== "undefined" ? globalThis : global || self), (global.VinzeGallery = factory(root.Vinze)));
+  })(this, function (Vinze) {
     ("use strict");
 
     var utils;
